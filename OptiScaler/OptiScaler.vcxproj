@@ -418,6 +418,9 @@ copy NUL "$(SolutionDir)x64\Release\a\!! EXTRACT ALL FILES TO GAME FOLDER !!" /Y
     <ClInclude Include="inputs\XeSS_Proxy.h" />
     <ClInclude Include="inputs\XeSS_Vulkan.h" />
     <ClInclude Include="menu\font\Hack_Compressed.h" />
+    <ClInclude Include="menu\locale\ui_locale.h" />
+    <ClInclude Include="menu\locale\ui_widgets.h" />
+    <ClInclude Include="menu\locale\zh_cn_font_subset.h" />
     <ClInclude Include="misc\FrameLimit.h" />
     <ClInclude Include="misc\Quirks.h" />
     <ClInclude Include="OwnedMutex.h" />
@@ -680,6 +683,14 @@ copy NUL "$(SolutionDir)x64\Release\a\!! EXTRACT ALL FILES TO GAME FOLDER !!" /Y
     <ClCompile Include="hooks\D3D11_Hooks.cpp" />
     <ClCompile Include="hooks\Vulkan_Hooks.cpp" />
     <ClCompile Include="menu\menu_common.cpp" />
+    <ClCompile Include="menu\locale\ui_locale.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile Include="menu\locale\ui_locale_font.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="menu\menu_dx_base.cpp" />
     <ClCompile Include="menu\menu_dx11.cpp" />
     <ClCompile Include="menu\menu_dx12.cpp" />
