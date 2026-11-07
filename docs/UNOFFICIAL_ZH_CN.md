@@ -42,6 +42,10 @@ LoadCjkFont=true
 
 技术缩写保持英文，例如 DLSS、DLSSG、FSR、XeSS、XeFG、RCAS、FG、FPS、HDR、DRS、Reflex、AntiLag 2、LatencyFlex、XeLL。ImGui 控件 ID 在英文模式下与上游相同；中文模式使用 `译文###英文`，ID 载荷仍是原来的英文。printf 占位符的顺序和类型不变。配置里已有的键不会改含义。
 
+## GitHub Actions
+
+`.github/workflows/unofficial_zh_cn_release_x64.yml` 在分支 `cursor/zh-cn-overlay-l10n-bb48` 的 push 上，用 GitHub 托管的 `windows-2022` 编译 **Release | x64**。它只上传构建产物，不签名、不发布 release、不读取密钥。产物名是 `OptiScaler-unofficial-zh-CN-Release-x64`。
+
 ## Windows 构建
 
 这个仓库在 Linux 环境里不能产出 `OptiScaler.dll`。需要在 Windows 上用 Visual Studio 2022 构建。

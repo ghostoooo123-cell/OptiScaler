@@ -1,0 +1,93 @@
+# Unofficial fork-only build. Compiles OptiScaler Release x64 on a
+# GitHub-hosted Windows runner. It does not sign binaries, publish a
+# release, read secrets, or change repository settings.
+
+name: Unofficial zh-CN Release x64
+
+on:
+  push:
+    branches:
+      - cursor/zh-cn-overlay-l10n-bb48
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: unofficial-zh-cn-release-x64-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  release-x64:
+    name: Release x64
+    runs-on: windows-2022
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Add MSBuild to PATH
+        uses: microsoft/setup-msbuild@v2
+
+      - name: Build OptiScaler.sln Release x64
+        shell: pwsh
+        run: |
+          $log = Join-Path $env:GITHUB_WORKSPACE "msbuild-release-x64.log"
+          msbuild OptiScaler.sln /m /nologo /p:Configuration=Release /p:Platform=x64 /verbosity:minimal "/flp:logfile=$log;verbosity=normal"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Record version, hashes, and unofficial package notes
+        shell: pwsh
+        run: |
+          $out = Join-Path $env:GITHUB_WORKSPACE "x64\Release\a"
+          $dll = Join-Path $out "OptiScaler.dll"
+          if (-not (Test-Path $dll)) { throw "OptiScaler.dll was not produced at $dll" }
+          Copy-Item -Force (Join-Path $env:GITHUB_WORKSPACE "LICENSE") (Join-Path $out "LICENSE")
+          Copy-Item -Force (Join-Path $env:GITHUB_WORKSPACE "docs\UNOFFICIAL_ZH_CN.md") (Join-Path $out "UNOFFICIAL_ZH_CN.md")
+          @(
+            "Unofficial Simplified Chinese UI build of OptiScaler v0.9.4."
+            "Not affiliated with the OptiScaler team. Not an upstream release."
+            "Repository: ${{ github.repository }}"
+            "Commit: ${{ github.sha }}"
+            "Workflow run: ${{ github.run_id }}"
+            "Configuration: Release"
+            "Platform: x64"
+            "Runner: windows-2022"
+            "This archive is the project's Release x64 post-build folder (x64\Release\a), plus the GPL-3.0 LICENSE and UNOFFICIAL_ZH_CN.md."
+            "The post-build copies are the same companion DLLs, ini, setup scripts, and third-party license files the v0.9.4 project copies."
+            "Nothing in this workflow installs the files into a game."
+          ) | Set-Content -Encoding utf8 (Join-Path $out "UNOFFICIAL.txt")
+          $info = [Diagnostics.FileVersionInfo]::GetVersionInfo($dll)
+          $hash = (Get-FileHash -Algorithm SHA256 $dll).Hash
+          @(
+            "FileVersion=$($info.FileVersion)"
+            "ProductVersion=$($info.ProductVersion)"
+            "FileDescription=$($info.FileDescription)"
+            "OriginalFilename=$($info.OriginalFilename)"
+            "SHA256=$hash"
+            "Bytes=$((Get-Item $dll).Length)"
+            "Commit=${{ github.sha }}"
+            "RunId=${{ github.run_id }}"
+          ) | Set-Content -Encoding utf8 (Join-Path $out "OptiScaler.dll.version.txt")
+          $manifest = foreach ($file in Get-ChildItem $out -Recurse -File) {
+            $rel = $file.FullName.Substring($out.Length).TrimStart('\')
+            $fileHash = (Get-FileHash -Algorithm SHA256 $file.FullName).Hash
+            "{0}  {1}  {2}" -f $fileHash, $file.Length, $rel
+          }
+          $manifest | Set-Content -Encoding utf8 (Join-Path $env:GITHUB_WORKSPACE "SHA256SUMS.txt")
+          Copy-Item -Force (Join-Path $env:GITHUB_WORKSPACE "SHA256SUMS.txt") (Join-Path $out "SHA256SUMS.txt")
+          7z a -tzip (Join-Path $env:GITHUB_WORKSPACE "OptiScaler-unofficial-zh-CN-v0.9.4-Release-x64.zip") "$out\*"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          Get-Content (Join-Path $out "OptiScaler.dll.version.txt")
+
+      - name: Upload Release x64 package and build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: OptiScaler-unofficial-zh-CN-Release-x64
+          path: |
+            OptiScaler-unofficial-zh-CN-v0.9.4-Release-x64.zip
+            msbuild-release-x64.log
+            SHA256SUMS.txt
+          if-no-files-found: error
