@@ -213,7 +213,7 @@ std::string LowerAscii(const char* tag)
         out.push_back(static_cast<char>(std::tolower(*p)));
     return out;
 }
-}
+} // namespace
 
 namespace UiLocale
 {
@@ -303,4 +303,4 @@ void VisitTranslations(void (*fn)(const char* english, const char* translated, v
     for (const Entry& entry : kEntries)
         fn(entry.en, entry.zh, user);
 }
-}
+} // namespace UiLocale

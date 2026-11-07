@@ -2293,9 +2293,9 @@ bool MenuCommon::RenderMenu()
             ImGui::PushStyleColor(ImGuiCol_FrameBg, IM_COL32(0, 0, 0, 0));
 
             if (UiWidgets::Begin("Splash", nullptr,
-                             ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoDecoration |
-                                 ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing |
-                                 ImGuiWindowFlags_NoNav))
+                                 ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoDecoration |
+                                     ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing |
+                                     ImGuiWindowFlags_NoNav))
             {
                 float splashScale = 1.0f;
                 float baseScaleHeight = 720.0f;
@@ -2309,7 +2309,7 @@ bool MenuCommon::RenderMenu()
                     ImGui::SetWindowFontScale(splashScale);
 
                 UiWidgets::Text("OptiScaler - %s for menu",
-                            Keybind::KeyNameFromVirtualKeyCode(config->ShortcutKey.value_or_default()).c_str());
+                                Keybind::KeyNameFromVirtualKeyCode(config->ShortcutKey.value_or_default()).c_str());
                 UiWidgets::TextColored(toneMapColor(ImVec4(1.0f, 1.0f, 1.0f, 0.7f)), splashMessage.c_str());
 
                 splashSize = ImGui::GetWindowSize();
@@ -2355,9 +2355,9 @@ bool MenuCommon::RenderMenu()
 
             bool pushedFont = false;
             if (UiWidgets::Begin("Update Available", nullptr,
-                             ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoDecoration |
-                                 ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing |
-                                 ImGuiWindowFlags_NoNav))
+                                 ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoDecoration |
+                                     ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing |
+                                     ImGuiWindowFlags_NoNav))
             {
                 float splashScale = 1.0f;
                 float baseScaleHeight = 720.0f;
@@ -2378,7 +2378,7 @@ bool MenuCommon::RenderMenu()
                 UiWidgets::TextColored(toneMapColor(ImVec4(1.0f, 0.0f, 0.0f, 1.0f)), "OptiScaler Update available");
                 ImGui::Spacing();
                 UiWidgets::Text("Press %s for more info",
-                            Keybind::KeyNameFromVirtualKeyCode(config->ShortcutKey.value_or_default()).c_str());
+                                Keybind::KeyNameFromVirtualKeyCode(config->ShortcutKey.value_or_default()).c_str());
 
                 if (pushedFont)
                     ImGui::PopFontSize();
@@ -2472,9 +2472,9 @@ bool MenuCommon::RenderMenu()
         ImGui::PushStyleColor(ImGuiCol_PlotLines, toneMapColor(green));
 
         if (UiWidgets::Begin("Performance Overlay", nullptr,
-                         ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoDecoration |
-                             ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing |
-                             ImGuiWindowFlags_NoNav))
+                             ImGuiWindowFlags_NoSavedSettings | ImGuiWindowFlags_NoDecoration |
+                                 ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoFocusOnAppearing |
+                                 ImGuiWindowFlags_NoNav))
         {
             std::string api;
             if (state.isRunningOnDXVK || state.isRunningOnLinux)
@@ -2911,8 +2911,9 @@ bool MenuCommon::RenderMenu()
                 if (versionStatus.updateAvailable && !versionStatus.latestTag.empty())
                 {
                     ImGui::Spacing();
-                    UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.8f, 0.f, 1.f)), "Update available: %s (current %s)",
-                                       versionStatus.latestTag.c_str(), currentVersionText.c_str());
+                    UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.8f, 0.f, 1.f)),
+                                           "Update available: %s (current %s)", versionStatus.latestTag.c_str(),
+                                           currentVersionText.c_str());
 
                     if (!versionStatus.latestUrl.empty())
                     {
@@ -2931,8 +2932,8 @@ bool MenuCommon::RenderMenu()
                 // else if (!versionStatus.error.empty())
                 //{
                 //    ImGui::Spacing();
-                //    UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.4f, 0.f, 1.f)), "%s", versionStatus.error.c_str());
-                //    ImGui::Spacing();
+                //    UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.4f, 0.f, 1.f)), "%s",
+                //    versionStatus.error.c_str()); ImGui::Spacing();
                 //}
             }
 
@@ -2967,8 +2968,8 @@ bool MenuCommon::RenderMenu()
                     std::string joinedUpscalers(joined.begin(), joined.end());
 
                     UiWidgets::Text("Please select %s as upscaler from game\noptions and load a save game "
-                                "to enable Opti settings.\nUpscalers don't always work in menus.",
-                                joinedUpscalers.c_str());
+                                    "to enable Opti settings.\nUpscalers don't always work in menus.",
+                                    joinedUpscalers.c_str());
 
                     if (config->UseHQFont.value_or_default())
                         ImGui::PopFontSize();
@@ -2984,28 +2985,33 @@ bool MenuCommon::RenderMenu()
 
                     if (state.isRunningOnNvidia)
                     {
-                        UiWidgets::Text("nvngx_dlss : %s", state.NVNGX_DLSS_Path.has_value() ? UiTr("Exists") : UiTr("Doesn't Exist"));
+                        UiWidgets::Text("nvngx_dlss : %s",
+                                        state.NVNGX_DLSS_Path.has_value() ? UiTr("Exists") : UiTr("Doesn't Exist"));
                         ImGui::SameLine(0.0f, 16.0f);
                         UiWidgets::Text("nvngx_dlssd : %s",
-                                    state.NVNGX_DLSSD_Path.has_value() ? UiTr("Exists") : UiTr("Doesn't Exist"));
+                                        state.NVNGX_DLSSD_Path.has_value() ? UiTr("Exists") : UiTr("Doesn't Exist"));
                     }
                     else
                     {
                         ImGui::SameLine(0.0f, 16.0f);
                         UiWidgets::Text("nvngx replacement: %s",
-                                    state.nvngxReplacement.has_value() ? UiTr("Exists") : UiTr("Doesn't Exist"));
+                                        state.nvngxReplacement.has_value() ? UiTr("Exists") : UiTr("Doesn't Exist"));
                     }
 
-                    UiWidgets::Text("libxess: %s",
-                                (state.libxessExists || XeSSProxy::Module() != nullptr) ? UiTr("Exists") : UiTr("Doesn't Exist"));
+                    UiWidgets::Text("libxess: %s", (state.libxessExists || XeSSProxy::Module() != nullptr)
+                                                       ? UiTr("Exists")
+                                                       : UiTr("Doesn't Exist"));
 
                     UiWidgets::Text("FSR Hooks: %s", state.fsrHooks ? UiTr("Exist") : UiTr("Don't Exist"));
                     ImGui::SameLine(0.0f, 16.0f);
-                    UiWidgets::Text("FSR 3.1: %s", FfxApiProxy::Dx12Module() != nullptr ? UiTr("Exists") : UiTr("Doesn't Exist"));
+                    UiWidgets::Text("FSR 3.1: %s",
+                                    FfxApiProxy::Dx12Module() != nullptr ? UiTr("Exists") : UiTr("Doesn't Exist"));
                     ImGui::SameLine(0.0f, 16.0f);
-                    UiWidgets::Text("FSR 3.1 SR: %s", FfxApiProxy::Dx12Module_SR() != nullptr ? UiTr("Exists") : UiTr("Doesn't Exist"));
+                    UiWidgets::Text("FSR 3.1 SR: %s",
+                                    FfxApiProxy::Dx12Module_SR() != nullptr ? UiTr("Exists") : UiTr("Doesn't Exist"));
                     ImGui::SameLine(0.0f, 16.0f);
-                    UiWidgets::Text("FSR 3.1 FG: %s", FfxApiProxy::Dx12Module_FG() != nullptr ? UiTr("Exists") : UiTr("Doesn't Exist"));
+                    UiWidgets::Text("FSR 3.1 FG: %s",
+                                    FfxApiProxy::Dx12Module_FG() != nullptr ? UiTr("Exists") : UiTr("Doesn't Exist"));
 
                     ImGui::Spacing();
                 }
@@ -3032,7 +3038,7 @@ bool MenuCommon::RenderMenu()
                     ImGui::SetWindowFontScale(menuResScale * 3.0f);
 
                 UiWidgets::Text("%s is active, but not currently used by the game\nPlease enter the game",
-                            currentFeature->Name().c_str());
+                                currentFeature->Name().c_str());
 
                 if (config->UseHQFont.value_or_default())
                     ImGui::PopFont();
@@ -3065,8 +3071,8 @@ bool MenuCommon::RenderMenu()
                             UiWidgets::Text(state.DeviceAdapterNames[state.currentD3D12Device].c_str());
 
                         UiWidgets::Text("D3D11 %s| %s %d.%d.%d", state.isRunningOnDXVK ? "(DXVK) " : "",
-                                    currentFeature->Name().c_str(), currentFeature->Version().major,
-                                    currentFeature->Version().minor, currentFeature->Version().patch);
+                                        currentFeature->Name().c_str(), currentFeature->Version().major,
+                                        currentFeature->Version().minor, currentFeature->Version().patch);
                         ImGui::SameLine(0.0f, 6.0f);
                         UiWidgets::Text("| Input: %s", state.currentInputApiName.c_str());
 
@@ -3084,8 +3090,8 @@ bool MenuCommon::RenderMenu()
                             UiWidgets::Text(state.DeviceAdapterNames[state.currentD3D12Device].c_str());
 
                         UiWidgets::Text("D3D12 %s| %s %d.%d.%d", state.isRunningOnDXVK ? "(DXVK) " : "",
-                                    currentFeature->Name().c_str(), currentFeature->Version().major,
-                                    currentFeature->Version().minor, currentFeature->Version().patch);
+                                        currentFeature->Name().c_str(), currentFeature->Version().major,
+                                        currentFeature->Version().minor, currentFeature->Version().patch);
                         ImGui::SameLine(0.0f, 6.0f);
                         UiWidgets::Text("| Input: %s", state.currentInputApiName.c_str());
 
@@ -3103,8 +3109,8 @@ bool MenuCommon::RenderMenu()
                             UiWidgets::Text(state.DeviceAdapterNames[state.currentVkDevice].c_str());
 
                         UiWidgets::Text("Vulkan %s| %s %d.%d.%d", state.isRunningOnDXVK ? "(DXVK) " : "",
-                                    currentFeature->Name().c_str(), currentFeature->Version().major,
-                                    currentFeature->Version().minor, currentFeature->Version().patch);
+                                        currentFeature->Name().c_str(), currentFeature->Version().major,
+                                        currentFeature->Version().minor, currentFeature->Version().patch);
                         ImGui::SameLine(0.0f, 6.0f);
                         UiWidgets::Text("| Input: %s", state.currentInputApiName.c_str());
 
@@ -3162,7 +3168,7 @@ bool MenuCommon::RenderMenu()
                     {
                         ImGui::Spacing();
                         UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.8f, 0.f, 1.f)),
-                                           "nvngx_dlss.dll not found, DLSS disabled!");
+                                               "nvngx_dlss.dll not found, DLSS disabled!");
                     }
                 }
 
@@ -3232,7 +3238,8 @@ bool MenuCommon::RenderMenu()
                             {
                                 for (int n = 0; n < 6; n++)
                                 {
-                                    if (UiWidgets::Selectable(models[n], (config->NetworkModel.value_or_default() == n)))
+                                    if (UiWidgets::Selectable(models[n],
+                                                              (config->NetworkModel.value_or_default() == n)))
                                     {
                                         config->NetworkModel = n;
                                         state.newBackend = currentBackend;
@@ -3289,7 +3296,7 @@ bool MenuCommon::RenderMenu()
                                 {
                                     auto name = StrFmt("FSR %s", state.ffxUpscalerVersionNames[n]);
                                     if (UiWidgets::Selectable(name.c_str(),
-                                                          config->FfxUpscalerIndex.value_or_default() == n))
+                                                              config->FfxUpscalerIndex.value_or_default() == n))
                                         _ffxUpscalerIndex = n;
                                 }
 
@@ -3328,7 +3335,7 @@ bool MenuCommon::RenderMenu()
 
                                 ImGui::SetNextItemWidth(150.0f * menuResScale);
                                 if (UiWidgets::Combo("Input Colour Space", &currentColorSpace, colorSpaces,
-                                                 IM_ARRAYSIZE(colorSpaces)))
+                                                     IM_ARRAYSIZE(colorSpaces)))
                                 {
                                     bool isSrgb = (currentColorSpace == 2);
                                     bool isPq = (currentColorSpace == 3);
@@ -3393,7 +3400,7 @@ bool MenuCommon::RenderMenu()
                                     UiWidgets::TextDisabled("(Active: %d)", state.currentFsr4Preset.value());
                                 else if (FSR4ModelSelection::IsInt8FsrHooked())
                                     UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.8f, 0.f, 1.f)),
-                                                       "(Potential FSR3 fallback)");
+                                                           "(Potential FSR3 fallback)");
                                 else
                                     UiWidgets::TextDisabled("(Failed to hook)");
                             }
@@ -3532,7 +3539,8 @@ bool MenuCommon::RenderMenu()
                                     {
                                         // Reactive Scale
                                         float reactiveScale = config->FsrReactiveScale.value_or_default();
-                                        if (UiWidgets::SliderFloat("Reactive Scale", &reactiveScale, 0.0f, 1.0f, "%.3f"))
+                                        if (UiWidgets::SliderFloat("Reactive Scale", &reactiveScale, 0.0f, 1.0f,
+                                                                   "%.3f"))
                                             config->FsrReactiveScale = reactiveScale;
 
                                         ShowHelpMarker("Meant for development purpose to test if\n"
@@ -3549,7 +3557,7 @@ bool MenuCommon::RenderMenu()
                                         // Accumulation Added Per Frame
                                         float accAddPerFrame = config->FsrAccAddPerFrame.value_or_default();
                                         if (UiWidgets::SliderFloat("Acc. Added Per Frame", &accAddPerFrame, 0.00f, 1.0f,
-                                                               "%.3f"))
+                                                                   "%.3f"))
                                             config->FsrAccAddPerFrame = accAddPerFrame;
 
                                         ShowHelpMarker(
@@ -3563,7 +3571,7 @@ bool MenuCommon::RenderMenu()
                                         // Min Disocclusion Accumulation
                                         float minDisOccAcc = config->FsrMinDisOccAcc.value_or_default();
                                         if (UiWidgets::SliderFloat("Min. Disocclusion Acc.", &minDisOccAcc, -1.0f, 1.0f,
-                                                               "%.3f"))
+                                                                   "%.3f"))
                                             config->FsrMinDisOccAcc = minDisOccAcc;
 
                                         ShowHelpMarker("Increasing this value may reduce white pixel temporal\n"
@@ -3598,7 +3606,7 @@ bool MenuCommon::RenderMenu()
                         if (overridden)
                         {
                             UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.8f, 0.f, 1.f)),
-                                               "Presets are overridden externally");
+                                                   "Presets are overridden externally");
                             ShowHelpMarker("This usually happens due to using tools\n"
                                            "such as Nvidia App or Nvidia Inspector");
                             // UiWidgets::Text("Selecting setting below will disable that external override\n"
@@ -3917,7 +3925,7 @@ bool MenuCommon::RenderMenu()
                     {
                         ImGui::Spacing();
                         UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.f, 0.0f, 1.f)),
-                                           "Save Settings and restart to apply the changes");
+                                               "Save Settings and restart to apply the changes");
                         ImGui::Spacing();
                     }
 
@@ -4303,14 +4311,15 @@ bool MenuCommon::RenderMenu()
                                     ImGui::PushItemWidth(115.0f * menuResScale);
                                     auto fptSafetyMargin = config->FGFPTSafetyMarginInMs.value_or_default();
                                     if (UiWidgets::InputFloat("Safety Margins in ms", &fptSafetyMargin, 0.01f, 0.1f,
-                                                          "%.2f"))
+                                                              "%.2f"))
                                         config->FGFPTSafetyMarginInMs = fptSafetyMargin;
                                     ShowHelpMarker("Safety margins in millisecons\n"
                                                    "FSR default value: 0.1ms\n"
                                                    "Opti default value: 0.01ms");
 
                                     auto fptVarianceFactor = config->FGFPTVarianceFactor.value_or_default();
-                                    if (UiWidgets::SliderFloat("Variance Factor", &fptVarianceFactor, 0.0f, 1.0f, "%.2f"))
+                                    if (UiWidgets::SliderFloat("Variance Factor", &fptVarianceFactor, 0.0f, 1.0f,
+                                                               "%.2f"))
                                         config->FGFPTVarianceFactor = fptVarianceFactor;
                                     ShowHelpMarker("Variance factor\n"
                                                    "FSR default value: 0.1\n"
@@ -4335,7 +4344,7 @@ bool MenuCommon::RenderMenu()
                                     auto fpWaitForSingleObjectOnFence =
                                         config->FGFPTAllowWaitForSingleObjectOnFence.value_or_default();
                                     if (UiWidgets::Checkbox("Enable WaitForSingleObjectOnFence",
-                                                        &fpWaitForSingleObjectOnFence))
+                                                            &fpWaitForSingleObjectOnFence))
                                     {
                                         config->FGFPTAllowWaitForSingleObjectOnFence = fpWaitForSingleObjectOnFence;
                                     }
@@ -4390,19 +4399,19 @@ bool MenuCommon::RenderMenu()
                         if (restartNeeded)
                         {
                             UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.8f, 0.f, 1.f)),
-                                               "Restart the game to apply correct XeFG settings!");
+                                                   "Restart the game to apply correct XeFG settings!");
                         }
                         else
                         {
                             if (!correctMVs)
                                 UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.f, 0.f, 1.f)),
-                                                   "Requires disabling dilated motion vectors");
+                                                       "Requires disabling dilated motion vectors");
 
                             if (!ignoreChecks && state.realExclusiveFullscreen)
                             {
                                 cantActivate = true;
                                 UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.f, 0.f, 1.f)),
-                                                   "Borderless display mode required!");
+                                                       "Borderless display mode required!");
                             }
 
                             if (!ignoreChecks && state.isHdrActive)
@@ -4412,7 +4421,7 @@ bool MenuCommon::RenderMenu()
                                 {
                                     cantActivate = true;
                                     UiWidgets::TextColored(toneMapColor(ImVec4(1.0f, 0.0f, 0.0f, 1.f)),
-                                                       "XeFG only supports HDR10");
+                                                           "XeFG only supports HDR10");
                                 }
                             }
                         }
@@ -4856,12 +4865,12 @@ bool MenuCommon::RenderMenu()
                     else if (state.activeFgOutput == FGOutput::FSRFG && !FfxApiProxy::IsFGReady())
                     {
                         UiWidgets::TextColored(toneMapColor({ 1.0f, 0.0f, 0.0f, 1.0f }),
-                                           "amd_fidelityfx_dx12.dll is missing!"); // Probably never will be visible
+                                               "amd_fidelityfx_dx12.dll is missing!"); // Probably never will be visible
                     }
                     else if (state.activeFgOutput == FGOutput::XeFG && XeFGProxy::Module() == nullptr)
                     {
                         UiWidgets::TextColored(toneMapColor({ 1.0f, 0.0f, 0.0f, 1.0f }),
-                                           "libxess_fg.dll is missing!"); // Probably never will be visible
+                                               "libxess_fg.dll is missing!"); // Probably never will be visible
                     }
                 }
 
@@ -4874,7 +4883,7 @@ bool MenuCommon::RenderMenu()
 
                     if (!state.NukemsFilesAvailable)
                         UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.f, 0.f, 1.f)),
-                                           "Please put dlssg_to_fsr3_amd_is_better.dll next to OptiScaler");
+                                               "Please put dlssg_to_fsr3_amd_is_better.dll next to OptiScaler");
 
                     if (!ReflexHooks::isReflexHooked())
                     {
@@ -4884,7 +4893,7 @@ bool MenuCommon::RenderMenu()
                     else if (!ReflexHooks::isDlssgDetected())
                     {
                         UiWidgets::Text("Please select DLSS Frame Generation in the game options\n"
-                                    "You might need to select DLSS first");
+                                        "You might need to select DLSS first");
                     }
 
                     if (state.swapchainApi == DX12)
@@ -4905,7 +4914,7 @@ bool MenuCommon::RenderMenu()
                     else if (state.swapchainApi == Vulkan)
                     {
                         UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.8f, 0.f, 1.f)),
-                                           "DLSSG is purposefully disabled when this menu is visible");
+                                               "DLSSG is purposefully disabled when this menu is visible");
                         ImGui::Spacing();
                     }
 
@@ -4954,7 +4963,7 @@ bool MenuCommon::RenderMenu()
                         {
                             UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.f, 0.f, 1.f)), "OFF");
                             UiWidgets::Text("Please select FSR Frame Generation in the game options\n"
-                                        "You might need to select FSR first");
+                                            "You might need to select FSR first");
                         }
                     }
 
@@ -5001,7 +5010,7 @@ bool MenuCommon::RenderMenu()
                         {
                             UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.f, 0.f, 1.f)), "OFF");
                             UiWidgets::Text("Please select DLSS Frame Generation in the game options\n"
-                                        "You might need to select DLSS first");
+                                            "You might need to select DLSS first");
                         }
                     }
                 }
@@ -5091,8 +5100,8 @@ bool MenuCommon::RenderMenu()
 
                             ImGui::SameLine(0.0f, 6.0f);
                             UiWidgets::Text("Near: %.1f Far: %.1f",
-                                        state.lastFsrCameraNear < 500000.0f ? state.lastFsrCameraNear : 500000.0f,
-                                        state.lastFsrCameraFar < 500000.0f ? state.lastFsrCameraFar : 500000.0f);
+                                            state.lastFsrCameraNear < 500000.0f ? state.lastFsrCameraNear : 500000.0f,
+                                            state.lastFsrCameraFar < 500000.0f ? state.lastFsrCameraFar : 500000.0f);
 
                             ImGui::Spacing();
                             ImGui::Spacing();
@@ -5147,7 +5156,7 @@ bool MenuCommon::RenderMenu()
                     if (state.reflexShowWarning)
                     {
                         UiWidgets::TextColored(toneMapColor(ImVec4(1.f, 0.f, 0.f, 1.f)),
-                                           "Using Reflex's limit with OptiFG has performance overhead");
+                                               "Using Reflex's limit with OptiFG has performance overhead");
 
                         ImGui::Spacing();
                     }
@@ -5708,13 +5717,13 @@ bool MenuCommon::RenderMenu()
                             if (currentFeature != nullptr && !currentFeature->IsFrozen())
                             {
                                 UiWidgets::Text("Output Scaling is %s, Target Res: %dx%d (%.2f)\nJitter Count: %d",
-                                            config->OutputScalingEnabled.value_or_default() ? UiTr("ENABLED")
-                                                                                            : UiTr("DISABLED"),
-                                            (uint32_t) (currentFeature->DisplayWidth() * _ssRatio),
-                                            (uint32_t) (currentFeature->DisplayHeight() * _ssRatio),
-                                            ((float) currentFeature->DisplayWidth() * _ssRatio) /
-                                                (float) currentFeature->RenderWidth(),
-                                            currentFeature->JitterCount());
+                                                config->OutputScalingEnabled.value_or_default() ? UiTr("ENABLED")
+                                                                                                : UiTr("DISABLED"),
+                                                (uint32_t) (currentFeature->DisplayWidth() * _ssRatio),
+                                                (uint32_t) (currentFeature->DisplayHeight() * _ssRatio),
+                                                ((float) currentFeature->DisplayWidth() * _ssRatio) /
+                                                    (float) currentFeature->RenderWidth(),
+                                                currentFeature->JitterCount());
                             }
 
                             ImGui::EndDisabled();
@@ -6525,8 +6534,8 @@ bool MenuCommon::RenderMenu()
                     float values[] = { 0.0f, 0.5f, 0.6f, 0.7f, 0.8f, 0.9f, 1.0f, 1.1f, 1.2f,
                                        1.3f, 1.4f, 1.5f, 1.6f, 1.7f, 1.8f, 1.9f, 2.0f };
 
-                    if (UiWidgets::SliderInt("Scale", &currentIndex, 0, IM_ARRAYSIZE(options) - 1, options[currentIndex],
-                                         ImGuiSliderFlags_ClampOnInput))
+                    if (UiWidgets::SliderInt("Scale", &currentIndex, 0, IM_ARRAYSIZE(options) - 1,
+                                             options[currentIndex], ImGuiSliderFlags_ClampOnInput))
                     {
                         if (currentIndex == 0)
                             config->FpsScale.reset();
@@ -6788,17 +6797,17 @@ bool MenuCommon::RenderMenu()
                             if (config->MipmapBiasFixedOverride.value_or_default())
                             {
                                 UiWidgets::Text("Current : %.3f / %.3f, Target: %.3f", state.lastMipBias,
-                                            state.lastMipBiasMax, config->MipmapBiasOverride.value());
+                                                state.lastMipBiasMax, config->MipmapBiasOverride.value());
                             }
                             else if (config->MipmapBiasScaleOverride.value_or_default())
                             {
                                 UiWidgets::Text("Current : %.3f / %.3f, Target: Base * %.3f", state.lastMipBias,
-                                            state.lastMipBiasMax, config->MipmapBiasOverride.value());
+                                                state.lastMipBiasMax, config->MipmapBiasOverride.value());
                             }
                             else
                             {
                                 UiWidgets::Text("Current : %.3f / %.3f, Target: Base + %.3f", state.lastMipBias,
-                                            state.lastMipBiasMax, config->MipmapBiasOverride.value());
+                                                state.lastMipBiasMax, config->MipmapBiasOverride.value());
                             }
                         }
                         else
@@ -6930,11 +6939,11 @@ bool MenuCommon::RenderMenu()
                 if (currentFeature != nullptr && !currentFeature->IsFrozen())
                 {
                     UiWidgets::Text("%dx%d -> %dx%d (%.1f) [%dx%d (%.1f)]", currentFeature->RenderWidth(),
-                                currentFeature->RenderHeight(), currentFeature->TargetWidth(),
-                                currentFeature->TargetHeight(),
-                                (float) currentFeature->TargetWidth() / (float) currentFeature->RenderWidth(),
-                                currentFeature->DisplayWidth(), currentFeature->DisplayHeight(),
-                                (float) currentFeature->DisplayWidth() / (float) currentFeature->RenderWidth());
+                                    currentFeature->RenderHeight(), currentFeature->TargetWidth(),
+                                    currentFeature->TargetHeight(),
+                                    (float) currentFeature->TargetWidth() / (float) currentFeature->RenderWidth(),
+                                    currentFeature->DisplayWidth(), currentFeature->DisplayHeight(),
+                                    (float) currentFeature->DisplayWidth() / (float) currentFeature->RenderWidth());
 
                     ImGui::SameLine(0.0f, 4.0f);
 
@@ -7271,10 +7280,10 @@ bool MenuCommon::RenderMenu()
                             ImGui::TableSetColumnIndex(0);
 
                             UiWidgets::Text("%08x, %s->%s, Count: %llu, %s", (size_t) it->first,
-                                        GetSourceString(it->second.captureInfo & 0xFF).c_str(),
-                                        GetDispatchString(it->second.captureInfo & 0xFF00).c_str(),
-                                        it->second.usageCount,
-                                        it->second.enabled ? UiTr("Active") : UiTr("Passive"));
+                                            GetSourceString(it->second.captureInfo & 0xFF).c_str(),
+                                            GetDispatchString(it->second.captureInfo & 0xFF00).c_str(),
+                                            it->second.usageCount,
+                                            it->second.enabled ? UiTr("Active") : UiTr("Passive"));
 
                             ImGui::TableSetColumnIndex(1);
 

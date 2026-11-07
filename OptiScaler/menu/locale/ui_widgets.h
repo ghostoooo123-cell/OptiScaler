@@ -55,10 +55,7 @@ inline void TextLinkOpenURL(const char* label, const char* url = nullptr)
     ImGui::TextLinkOpenURL(UiLabel(label), url);
 }
 
-inline bool Button(const char* label, const ImVec2& size = ImVec2(0, 0))
-{
-    return ImGui::Button(UiLabel(label), size);
-}
+inline bool Button(const char* label, const ImVec2& size = ImVec2(0, 0)) { return ImGui::Button(UiLabel(label), size); }
 
 inline bool Checkbox(const char* label, bool* v) { return ImGui::Checkbox(UiLabel(label), v); }
 
@@ -137,9 +134,9 @@ inline bool Combo(const char* label, int* current_item, const char* const items[
     return ImGui::Combo(UiLabel(label), current_item, used, items_count, popup_max_height_in_items);
 }
 
-inline ImVec2 CalcTextSize(const char* text, const char* text_end = nullptr,
-                           bool hide_text_after_double_hash = false, float wrap_width = -1.0f)
+inline ImVec2 CalcTextSize(const char* text, const char* text_end = nullptr, bool hide_text_after_double_hash = false,
+                           float wrap_width = -1.0f)
 {
     return ImGui::CalcTextSize(UiTr(text), text_end, hide_text_after_double_hash, wrap_width);
 }
-}
+} // namespace UiWidgets

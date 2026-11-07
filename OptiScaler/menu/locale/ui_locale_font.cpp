@@ -5,6 +5,7 @@
 
 #include <imgui/imgui.h>
 
+#include <cstdio>
 #include <cstring>
 #include <string>
 
@@ -27,8 +28,8 @@ void RememberRanges(ImFontGlyphRangesBuilder& builder)
         0x2014, // em dash
         0x2018, 0x2019, 0x201C, 0x201D,
         0x2026, // ellipsis
-        0x3001, 0x3002, 0x300A, 0x300B, 0x300C, 0x300D, 0x3010, 0x3011, 0xFF01, 0xFF08,
-        0xFF09, 0xFF0C, 0xFF1A, 0xFF1B, 0xFF1F,
+        0x3001, 0x3002, 0x300A, 0x300B, 0x300C, 0x300D, 0x3010, 0x3011,
+        0xFF01, 0xFF08, 0xFF09, 0xFF0C, 0xFF1A, 0xFF1B, 0xFF1F,
     };
     for (ImWchar codepoint : extra)
         builder.AddChar(codepoint);
@@ -54,7 +55,7 @@ bool MergeMemoryFont(ImFontAtlas* atlas, float size, const ImWchar* ranges)
     cfg.OversampleH = 1;
     cfg.OversampleV = 1;
     cfg.GlyphRanges = ranges;
-    ImFormatString(cfg.Name, IM_ARRAYSIZE(cfg.Name), "OptiScaler ZhCN");
+    std::snprintf(cfg.Name, IM_ARRAYSIZE(cfg.Name), "OptiScaler ZhCN");
 
     ImFont* merged = atlas->AddFontFromMemoryTTF(const_cast<unsigned char*>(ZhCnFontSubset), (int) ZhCnFontSubsetSize,
                                                  size, &cfg, ranges);
@@ -74,12 +75,12 @@ bool MergeFileFont(ImFontAtlas* atlas, float size, const ImWchar* ranges, const 
     cfg.OversampleH = 1;
     cfg.OversampleV = 1;
     cfg.GlyphRanges = ranges;
-    ImFormatString(cfg.Name, IM_ARRAYSIZE(cfg.Name), "OptiScaler ZhCN");
+    std::snprintf(cfg.Name, IM_ARRAYSIZE(cfg.Name), "OptiScaler ZhCN");
 
     ImFont* merged = atlas->AddFontFromFileTTF(narrow.c_str(), size, &cfg, ranges);
     return merged != nullptr;
 }
-}
+} // namespace
 
 void UiLocale::MergeCjkGlyphs(void* fontAtlas, bool enabled)
 {

@@ -35,7 +35,7 @@ void VisitTranslations(void (*fn)(const char* english, const char* translated, v
 // Merges a Simplified Chinese glyph source into the atlas. No-op when disabled or already merged.
 // Implemented in ui_locale_font.cpp (Windows / ImGui build). Safe to call before the first frame.
 void MergeCjkGlyphs(void* fontAtlas, bool enabled);
-}
+} // namespace UiLocale
 
 inline const char* UiTr(const char* text) { return UiLocale::Tr(text); }
 inline const char* UiLabel(const char* label) { return UiLocale::Label(label); }
