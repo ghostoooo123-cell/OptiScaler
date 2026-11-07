@@ -10,6 +10,8 @@
 #include <imgui/imgui_impl_win32.h>
 #include <imgui/imgui_impl_uwp.h>
 
+#include "locale/ui_locale.h"
+
 #include <detours/detours.h>
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
@@ -35,7 +37,7 @@ class ScopedCollapsingHeader
         ImGui::BeginChild("##CollapsingHeaderChild", ImVec2(0, 0), ImGuiChildFlags_AutoResizeY,
                           ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
 
-        _headerOpen = ImGui::CollapsingHeader(label, flags);
+        _headerOpen = ImGui::CollapsingHeader(UiLabel(label), flags);
         _active = true;
     }
 

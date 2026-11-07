@@ -158,6 +158,10 @@ Please check [this](Config.md) document for configuration parameters and explana
 > 
 > Also worth checking the [Compatibility List](https://github.com/optiscaler/OptiScaler/wiki/Compatibility-List) for possible game issues and their fixes.
 
+## Unofficial Simplified Chinese overlay
+
+This fork adds an unofficial zh-CN overlay on top of OptiScaler v0.9.4. It is not affiliated with the OptiScaler team, and it does not change upscaler, frame-generation, or spoofing behavior. The in-game menu has a Language control (`en` / `zh-CN`) that is stored in `OptiScaler.ini` when you press Save Settings. Strings without a translation stay in English. See [docs/UNOFFICIAL_ZH_CN.md](docs/UNOFFICIAL_ZH_CN.md) for the font, the ini keys, and the Windows build steps.
+
 ## Compilation
 
 ### Requirements

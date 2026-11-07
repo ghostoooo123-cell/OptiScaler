@@ -293,6 +293,15 @@
     <ClInclude Include="menu\font\Hack_Compressed.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="menu\locale\ui_locale.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\locale\ui_widgets.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="menu\locale\zh_cn_font_subset.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="menu\menu_dx_base.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -972,6 +981,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="menu\menu_common.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu\locale\ui_locale.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu\locale\ui_locale_font.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="menu\menu_dx_base.cpp">

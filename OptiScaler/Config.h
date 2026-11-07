@@ -303,6 +303,10 @@ class Config
     CustomOptional<bool> UseHQFont { true };
     CustomOptional<bool> DisableSplash { false };
     CustomOptional<float> FontSize { 14.0f };
+    // Overlay language. "en" or "zh-CN". Saved as auto while it stays at the default.
+    CustomOptional<std::string> UiLanguage { "en" };
+    // Merge a Simplified Chinese font into the overlay atlas. Default true so the language switch does not rebuild textures.
+    CustomOptional<bool> LoadCjkFont { true };
     CustomOptional<std::wstring, NoDefault> TTFFontPath;
     CustomOptional<int> FGShortcutKey { VK_END };
     CustomOptional<bool> LightTheme { false };
